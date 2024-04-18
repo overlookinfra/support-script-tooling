@@ -3,7 +3,7 @@ shopt -s nullglob
 
 for f in /opt/mft-automations/puppet_enterprise_support*gz /opt/mft-automations/puppet_enterprise_support*gz.gpg; do
    # Does the file have a 5 digit ticket number after puppet_enterprise_support_
-   has_ticket=$(echo "$f" | grep -Eo -- 'puppet_enterprise_support_[[:digit:]]{5}_')
+   has_ticket=$(echo "$f" | grep -Eo -- 'puppet_enterprise_support_[[:digit:]]+_')
 
    if ! [[ $has_ticket ]]; then
       echo "ERROR: no ticket ID found in $f"
@@ -47,4 +47,5 @@ for f in /opt/mft-automations/puppet_enterprise_support*gz /opt/mft-automations/
    rm -- "$f"
 done
 
-find /opt/mft-automations/err/ -type f -name "puppet_enterprise_support*gz" -mtime +30 -delete
+# Delete sup scripts older than 30 days
+find /opt/mft-automations/err/ -type f -name "puppet_enterprise_support*gz" -mtime -30 -delete
