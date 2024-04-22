@@ -1,7 +1,7 @@
 #!/bin/bash
 shopt -s nullglob
 
-for f in /opt/mft-automations/puppet_enterprise_support*gz /opt/mft-automations/puppet_enterprise_support*gz.gpg; do
+for f in /opt/mft-automations/puppet_enterprise_support*gz /opt/mft-automations/puppet_enterprise_support*gz.gpg /opt/mft-automations/puppet_enterprise_support*tar; do
    # Does the file have a 5 digit ticket number after puppet_enterprise_support_
    has_ticket=$(echo "$f" | grep -Eo -- 'puppet_enterprise_support_[[:digit:]]+_')
 
