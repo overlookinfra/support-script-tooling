@@ -2,21 +2,24 @@
 ## Prerequisites
 
 * Install `git` and `bolt`
-* Create the metrics_import directory in `root`'s home directory
+* Create the required directories
 ```bash
-mkdir metrics_import
+mkdir -p /root/metrics_import /opt/mft-automations/{err,}
 ```
-* Clone operational dashboards to this directory
+* Clone operational dashboards and install requirements
 ```bash
-cd metrics_import
+cd /root/metrics_import
 git clone https://github.com/puppetlabs/puppet_operational_dashboards.git
+bolt module install --force
+/opt/puppetlabs/bolt/bin/gem install --user-install toml-rb
 ```
 
-* Save files/metrics_import.sh to the `puppet_operational_dashboards` directory created by the `git clone`
+* Save files/metrics_import.sh to `/root/metrics_import/puppet_operational_dashboards`
 
 ## Set up InfluxDB and Grafana
-* Run the `provision_dashboard` plan from `root`'s home directory
+* Run the `provision_dashboard` plan
 ```bash
+cd /root/metrics_import/puppet_operational_dashboards
 bolt plan run puppet_operational_dashboards::provision_dashboard --targets localhost
 ```
 
